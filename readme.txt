@@ -52,6 +52,9 @@ Go to Change Sender Email Options and customize your settings.
 
 1. Admin View
    screenshot.png
+2. General Settings
+3. Advance Settings 
+4. Test Your settings 
 
 == Changelog ==
 
