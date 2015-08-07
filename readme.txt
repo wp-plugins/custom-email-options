@@ -1,5 +1,5 @@
 === Custom Email Options ===
-Contributors: vapvarun
+Contributors: vapvarun,wbcomdesigns
 Donate link: http://wbcomdesigns.com/
 Tags: custom email options,comments, spam, phpmailer, mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
 Requires at least: 3.0.1
@@ -60,3 +60,7 @@ Go to Change Sender Email Options and customize your settings.
 
 = 1.0.0 =
 * first version.
+= 1.0.1 =
+* Advance options added
+= 1.0.2 =
+* Options Improved

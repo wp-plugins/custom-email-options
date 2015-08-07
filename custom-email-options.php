@@ -3,9 +3,9 @@
 Plugin Name: Custom Email Options
 Plugin URI: http://www.wbcomdesigns.com/
 Description: Sender Email/Name Change and General Tweaks Options
-Version: 1.0.1
+Version: 1.0.2
 Text Domain: wb-change-sender-email
-Author: Wbcom Designs<admin@wbcomdesigns.com>
+Author: Wbcom Designs<admin@wbcomdesigns.com>,vapvarun<vapvarun@gmail.com>
 Author URI: http://www.wbcomdesigns.com/
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -38,14 +38,14 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 				$this->test_email_msg = "";
 				$this->general = array( //array of the tab based template section to be called in particular tab
 							'General Settings'	=> array(
+											'general_email_from',
+											'general_email_from_name',
 											'general_page404_redirect',
 											'general_title_wptexturize_no',
 											'general_generation_time',
-											'general_email_from',
-											'general_email_from_name',
 											'general_settings_remove',
 										),
-							'Advance Settings'	=> array(
+							'Extra Settings'	=> array(
 											'advance_email_option'
 										),
 							'Test Email'		=> array(
@@ -78,7 +78,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 			function save_wb_advance_data_pages()
 			{
 				global $wb_advance_tweak;
-				$nonce = str_replace( ' ', '_', 'Advance Settings' );
+				$nonce = str_replace( ' ', '_', 'Extra Settings' );
 					 
 					 if ( isset( $_POST['save_wb_general_data_nonce'] ) && wp_verify_nonce( $_POST['save_wb_general_data_nonce'], $nonce ) )
 					 {
@@ -91,12 +91,12 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 			function wb_sent_test_email()
 			{
 				$nonce=str_replace( ' ', '_', 'Test Email' );
-				if ( isset( $_POST['send_wb_test_email_nonce'] ) || wp_verify_nonce( $_POST['send_wb_test_email_nonce'], $nonce ) )
+				if ( isset( $_POST['save_wb_general_data_nonce'] ) || wp_verify_nonce( $_POST['save_wb_general_data_nonce'], $nonce ) )
 				 {
 					 if(wp_mail($_POST['mail_to'], $_POST['mail_subject'],$_POST['mail_message'])) {
-						$this->test_email_msg = 'Success';
+						$this->test_email_msg = 'Test is successful';
 					} else {
-						$this->test_email_msg = 'Failed';
+						$this->test_email_msg = 'Test failed';
 					}
 				 }
 			}
@@ -169,6 +169,10 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 							if( $nonce == 'General_Settings' )
 							{
 								$tweak->value = $wb_general_tweak[ $tweak_ID ];
+							}
+							else if($nonce == 'Test_Email')
+							{
+								$tweak->value = $this->test_email_msg;
 							}
 							else
 							{
